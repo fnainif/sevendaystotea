@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Developer Portfolio</title>
+    <!-- Modern clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Strict Pastel Palette as requested */
+            --baby-pink: #ffd1dc;
+            --lavender: #e6e6fa;
+            --dark-lavender: #b19cd9;
+            --text-color: #5a4f66;
+            --bg-color: #fcf9fc;
+            --card-bg: #ffffff;
+            
+            /* UI Elements */
+            --border-radius: 20px;
+            --soft-shadow: 0 10px 30px rgba(177, 156, 217, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            /* Gradient background utilizing the pastel colors */
+            background-image: linear-gradient(135deg, var(--baby-pink) 0%, var(--lavender) 100%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            color: #4a3f56;
+        }
+
+        /* --- Header / Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 3rem;
+            /* Glassmorphism effect */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            /* Accent gradient text */
+            background: linear-gradient(to right, #ff9eb5, #a385e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Portfolio Section --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Project Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--soft-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--baby-pink);
+            box-shadow: 0 15px 40px rgba(177, 156, 217, 0.3);
+        }
+
+        /* Image/Video Placeholder inside Cards */
+        .card-media {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0a0a0;
+            overflow: hidden;
+            /* Subtle pattern for placeholder */
+            background-image: linear-gradient(45deg, #f9f9f9 25%, #f0f0f0 25%, #f0f0f0 50%, #f9f9f9 50%, #f9f9f9 75%, #f0f0f0 75%, #f0f0f0 100%);
+            background-size: 20px 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--baby-pink), var(--dark-lavender));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(177, 156, 217, 0.4);
+        }
+
+        /* --- Admin Upload Section (Dropzone) --- */
+        .admin-section {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--soft-shadow);
+            margin-top: 4rem;
+            border: 2px dashed var(--dark-lavender);
+        }
+
+        .admin-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .dropzone {
+            width: 100%;
+            height: 200px;
+            border: 3px dashed var(--baby-pink);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 209, 220, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dropzone.dragover {
+            background: rgba(255, 209, 220, 0.5);
+            border-color: var(--dark-lavender);
+        }
+
+        .dropzone p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            pointer-events: none;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* Loading Indicator */
+        .loader-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(230, 230, 250, 0.5);
+            border-top: 4px solid var(--dark-lavender);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-msg {
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .admin-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Hi, I'm [Your Name]</h1>
+            <p>A passionate Flutter Developer creating beautiful, high-performance cross-platform applications with a touch of pastel magic.</p>
+        </header>
+
+        <!-- Portfolio Section -->
+        <h2 class="section-title">My Projects</h2>
+        <div class="portfolio-grid">
+
+            <!-- Project 1 (Google Play Placeholder) -->
+            <div class="card">
+                <div class="card-media">
+                    <span>App Image/Video</span>
+                </div>
+                <h3 class="card-title">Awesome Flutter App</h3>
+                <p class="card-desc">A feature-rich Flutter application showcasing fluid animations and complex state management.</p>
+                <!-- UPDATE: Replace href="#" with your Play Store Link -->
+                <a href="#" class="btn" target="_blank">View on Play Store</a>
+            </div>
+
+            <!-- Project 2 (Google Drive Placeholder) -->
+            <div class="card">
+                <div class="card-media">
+                    <span>App Image/Video</span>
+                </div>
+                <h3 class="card-title">Utility Tool</h3>
+                <p class="card-desc">A sleek utility application built with Flutter to boost everyday productivity.</p>
+                <!-- UPDATE: Replace href="#" with your Google Drive Link -->
+                <a href="#" class="btn" target="_blank">View on Drive</a>
+            </div>
+
+            <!-- Project 3 (Google Drive Placeholder) -->
+            <div class="card">
+                <div class="card-media">
+                    <span>App Image/Video</span>
+                </div>
+                <h3 class="card-title">Social Concept App</h3>
+                <p class="card-desc">A social networking concept with beautiful interactions and a clean UI layout.</p>
+                <!-- UPDATE: Replace href="#" with your Google Drive Link -->
+                <a href="#" class="btn" target="_blank">View on Drive</a>
+            </div>
+
+            <!-- Project 4 (Google Drive Placeholder) -->
+            <div class="card">
+                <div class="card-media">
+                    <span>Game Image/Video</span>
+                </div>
+                <h3 class="card-title">Flutter Game Engine</h3>
+                <p class="card-desc">An interactive, high-fps game built entirely using Flutter and the Flame engine.</p>
+                <!-- UPDATE: Replace href="#" with your Google Drive Link -->
+                <a href="#" class="btn" target="_blank">View on Drive</a>
+            </div>
+
+        </div>
+
+        <!-- Admin Upload Section -->
+        <div class="admin-section">
+            <h2 class="admin-title">Admin Area: Asset Upload</h2>
+            
+            <div class="dropzone" id="dropzone">
+                <p>Drag & Drop Image/Video here</p>
+                <p style="font-size: 0.9rem; opacity: 0.7;">or click to browse</p>
+                <input type="file" id="fileInput" accept="image/*,video/*">
+            </div>
+
+            <div class="loader-container" id="loaderContainer">
+                <div class="spinner"></div>
+                <div class="status-msg" id="statusMsg">Uploading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for File Drag & Drop + Upload Logic -->
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const loaderContainer = document.getElementById('loaderContainer');
+        const statusMsg = document.getElementById('statusMsg');
+
+        // Allow clicking the dropzone to open file dialog
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        // File input change event (when file is selected via click)
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Drag and Drop Events styling
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+        });
+
+        dropzone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+        });
+
+        // Drop event handling
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        // File processing function
+        function handleFile(file) {
+            // Show loading UI
+            loaderContainer.style.display = 'flex';
+            statusMsg.textContent = 'Reading file...';
+            statusMsg.style.color = 'var(--text-color)';
+
+            const reader = new FileReader();
+
+            // When file is fully read as base64
+            reader.onload = function(e) {
+                statusMsg.textContent = 'Uploading to Google Drive...';
+                
+                const fileData = {
+                    name: file.name,
+                    mimeType: file.type,
+                    data: e.target.result // This is the Base64 Data URL string
+                };
+
+                // Call the uploadFileToDrive function in Google Apps Script backend (code.gs)
+                google.script.run
+                    .withSuccessHandler(onSuccess)
+                    .withFailureHandler(onFailure)
+                    .uploadFileToDrive(fileData);
+            };
+
+            reader.onerror = function() {
+                showStatus('Error reading file.', 'red');
+            };
+
+            // Start reading file
+            reader.readAsDataURL(file);
+        }
+
+        // Success Callback from GAS Backend
+        function onSuccess(url) {
+            loaderContainer.style.display = 'none';
+            alert('Upload successful! File URL:\n' + url);
+        }
+
+        // Failure Callback from GAS Backend
+        function onFailure(error) {
+            showStatus('Upload failed: ' + error.message, 'red');
+        }
+
+        // Helper to show temporary status message
+        function showStatus(message, color) {
+            statusMsg.textContent = message;
+            statusMsg.style.color = color;
+            setTimeout(() => {
+                loaderContainer.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

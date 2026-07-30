@@ -1,0 +1,23 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "TheCountess_v1.moc3",
+		"Textures": [
+			"TheCountess_v1.4096/texture_00.png"
+		],
+		"Physics": "TheCountess_v1.physics3.json",
+		"DisplayInfo": "TheCountess_v1.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	]
+}
